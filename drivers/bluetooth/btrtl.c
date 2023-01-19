@@ -124,6 +124,13 @@ static const struct id_table ic_id_table[] = {
 	  .fw_name  = "rtl_bt/rtl8821c_fw.bin",
 	  .cfg_name = "rtl_bt/rtl8821c_config" },
 
+	/* 8821C with UART interface */
+	{ IC_INFO(RTL_ROM_LMP_8821A, 0xc, 0x8, HCI_UART),
+	  .config_needed = false,
+	  .has_rom_version = true,
+	  .fw_name  = "rtl_bt/rtl8821cs_fw.bin",
+	  .cfg_name = "rtl_bt/rtl8821cs_config" },
+
 	/* 8761A */
 	{ IC_INFO(RTL_ROM_LMP_8761A, 0xa, 0x6, HCI_USB),
 	  .config_needed = false,
@@ -900,9 +907,9 @@ int btrtl_get_uart_settings(struct hci_dev *hdev,
 		return -ENOENT;
 	}
 
-	rtl_dev_dbg(hdev, "device baudrate = 0x%08x", *device_baudrate);
-	rtl_dev_dbg(hdev, "controller baudrate = %u", *controller_baudrate);
-	rtl_dev_dbg(hdev, "flow control %d", *flow_control);
+	rtl_dev_info(hdev, "device baudrate = 0x%08x", *device_baudrate);
+	rtl_dev_info(hdev, "controller baudrate = %u", *controller_baudrate);
+	rtl_dev_info(hdev, "flow control %d", *flow_control);
 
 	return 0;
 }
@@ -927,3 +934,5 @@ MODULE_FIRMWARE("rtl_bt/rtl8822b_fw.bin");
 MODULE_FIRMWARE("rtl_bt/rtl8822b_config.bin");
 MODULE_FIRMWARE("rtl_bt/rtl8852au_fw.bin");
 MODULE_FIRMWARE("rtl_bt/rtl8852au_config.bin");
+MODULE_FIRMWARE("rtl_bt/rtl8821cs_fw.bin");
+MODULE_FIRMWARE("rtl_bt/rtl8821cs_config.bin");
